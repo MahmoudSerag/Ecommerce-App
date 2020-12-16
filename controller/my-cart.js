@@ -11,7 +11,7 @@ exports.getmyCart = async (req, res) => {
    .findOne({_id: `5fd4b5f7fd2091194f054694`})
    .select({myCart: 1, _id: 1});
    if (!userCarts) return res.render('404');
-    res.status(200).render(`users/my-cart`, {
+    res.status(201).render(`users/my-cart`, {
       userProducts: userCarts
     });
   }
@@ -34,7 +34,7 @@ exports.deleteCart = async (req, res) => {
       }
     }
     await user.save();
-    res.status(204).redirect(`/my-cart`);
+    res.status(300).redirect(`/my-cart`);
   } catch (error) {
     console.log(error.message);
   }

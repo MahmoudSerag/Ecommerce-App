@@ -11,7 +11,7 @@ exports.getAllProducts = async (req, res) => {
     const product = await productSchema.Product
     .find()
     .select({name: 1, price: 1, rate: 1, productID: 1});
-    res.status(200).render('users/all-products', {
+    res.status(201).render('users/all-products', {
       product: product
     });
   }
@@ -48,7 +48,7 @@ exports.postToMyCart = async (req, res) => {
     );
 
     await user.save();
-    res.status(201).redirect(`/my-cart`);
+    res.status(300).redirect(`/my-cart`);
   }
   catch (error) {
     console.log(error.message);

@@ -21,5 +21,5 @@ exports.postUser = async (req, res) => {
   });
   const result = await user.save();
   console.log(result);
-  res.status(201).redirect(`/add-product`);
+  res.status(300).redirect(`/add-product`);
 }

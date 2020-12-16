@@ -5,7 +5,7 @@ const productSchema = require('../model/product');
 // @route   Get /localhost:3000/add-product
 // @access  Public
 exports.getProductPage = async (req, res) => {
-  res.status(200).render(`users/add-product`);
+  res.status(201).render(`users/add-product`);
 }
 
 // @desc    From add-product page to all-product page
@@ -20,7 +20,7 @@ exports.addProduct = async (req, res) => {
       
     });
     await product.save();
-    res.status(201).redirect(`/all-products`);
+    res.status(300).redirect(`/all-products`);
   } 
   catch (error) {
     console.log(error.message);
