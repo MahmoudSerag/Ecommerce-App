@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../css/details.css">
+  <title>Details</title>
+</head>
+<body>
+  <%- include ('../include/header.ejs') %>
+  <div class="position">
+    <div class="productContainer">
+          <div class="product">
+            <img class="productImage" src="../images/2.jpg">
+            <div class="productDetails">
+              <p class="productData">Name: <%= productDetails.name %> </p>
+              
+  
+              <p class="productData">Rate: <%= productDetails.rate %> </p>
+              
+  
+              <p class="productData">Price: <%= productDetails.price %>$</p>
+          </div>
+        </div>
+    </div>
+  </div>
+  <%- include ('../include/footer.ejs') %>
+</body>
+</html>

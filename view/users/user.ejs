@@ -1,0 +1,36 @@
+<html>
+    <head>
+    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name = "describtion" content = "welcome to my torrent club">
+        <link rel="icon" href= "https://cdn.discordapp.com/attachments/487344084625653772/508674756753489921/sdadsadasdasda.png" type="image/x-icon"/>
+		<link rel = "stylesheet" href = "../css/user.css"/>
+        <title>User</title>
+    </head>
+    <body class = "Mahmoud">
+      <%- include ('../include/header.ejs') %>
+    <div class="background"></div>
+		<div class="x">
+        <h1>Create User</h1>
+		<br>
+        <form action="/" method="POST">
+            <b> <label>First name</label><br>
+                <input type="text" name="firstName" placeholder="Enter first name"><br><br>
+            <b> <label>Last name</label><br>
+                <input type="text" name="lastName" placeholder="Enter last name"><br><br>
+            <label>Email</label><br>
+                <input type="text" name="email" placeholder="Enter Email"><br><br>
+            <label>Password</lable><br>
+                <input type="password" name="password" placeholder="Enter password"><br><br>
+            <label><p class="age">Age</p></lable><br>
+                <input style="margin-top: -70px;" type="text" name="age" placeholder="Enter your age"><br><br>
+            <label><p class="age"></p></lable><br>
+                <input style="margin-top: -70px;" type="hidden" name="productID"><br><br>
+
+            </b>
+            <input class ="button" type="submit" value="Sign up">
+        </form>
+        <%- include ('../include/footer.ejs') %>
+        </div>
+    </body>
+</html>

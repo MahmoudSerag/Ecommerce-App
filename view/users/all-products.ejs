@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../css/all-products.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>All Products</title>
+    <i class="fas fa-caret-down"></i>
+    <i class="fas fa-long-arrow-alt-right"></i>
+  </head>
+  <body>
+    <%- include ('../include/header.ejs') %>
+    <div class="position">
+            <% if (product.length > 0) { %>
+                  <div class="productContainer">
+                  <% for (let i = 0; i < product.length; i++) { %>
+                      <div class="product">
+                        <img class="productImage" src="../images/8.webp">
+                        <div class="productDetails">
+                          <p class="productData">Name: <%= product[i].name %> </p>
+                          
+
+                          <p class="productData">Rate: <%= product[i].rate %> </p>
+                          
+
+                          <p class="productData">Price: <%= product[i].price %>$</p>
+                          
+
+                          <form action="/all-products" method="POST">
+
+                            <input type="hidden" name="name" value="<%= product[i].name %>">
+      
+                            <input type="hidden" name="rate" value="<%= product[i].rate %>">
+      
+                            <input type="hidden" name="price" value="<%= product[i].price %>">
+
+                            <input type="hidden" name="productID" value="<%= product[i]._id %>">
+      
+                            <button type="submit" class="addToCart">Buy</button>
+                          </form>
+                        </div>
+                      </div>
+                  <% } %>
+            <% } else { %>
+              <p class="notFound"> No Products Yet</p>
+            <%  } %>
+      </div>
+    </div>
+      <%- include ('../include/footer.ejs') %>
+  </body>
+</html>

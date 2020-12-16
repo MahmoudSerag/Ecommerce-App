@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel = "stylesheet" href = "../css/my-cart.css"/>
+  <title>My Cart</title>
+</head>
+<body>
+  <%- include ('../include/header.ejs') %>
+  <div class="position">
+  <div class="container">
+  <% if (userProducts.myCart.length > 0) { %>
+    <% for (let i = 0; i < userProducts.myCart.length; i++) { %>
+      <div class="item">
+        <% let x = "../images/6.webp" %>
+        <img src=<%= x %> alt="red mobile">
+        <p class="id">Price: <%= userProducts.myCart[i].price %>$</p>
+      </div>
+      <div class="control">
+        <form action="/my-cart" method="POST">
+          <input type="hidden" name="productId" value="<%= userProducts.myCart[i].productId %>">
+          <button class="btn" type="submit">Delete</button>
+        </form>
+        <form action="/my-cart/details" method="POST">
+          <input type="hidden" name="productID" value="<%= userProducts.myCart[i].productId %>">
+          <button class="btn" type="submit">Details</button>
+        </form>
+      </div>
+      <% } %>
+    </div>
+   <% } else { %>
+    <h1 style="color: wheat;"> NO PRODUCTS IN YOUR CART!</h1>
+   <% } %>
+  </div>
+  <%- include ('../include/footer.ejs') %>
+</body>
+</html>

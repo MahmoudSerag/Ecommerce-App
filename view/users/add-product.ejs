@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name = "describtion" content = "welcome to my torrent club">
+        <link rel="icon" href= "https://cdn.discordapp.com/attachments/487344084625653772/508674756753489921/sdadsadasdasda.png" type="image/x-icon"/>
+		<link rel = "stylesheet" href = "../css/add-product.css"/>
+        <title>Add Product</title>
+    </head>
+    <body class = "Mahmoud">
+      <%- include ('../include/header.ejs') %>
+		<h1>Add Product</h1>
+		<br>
+        <form action="/add-product" method="POST">
+            <b> 
+            <label>Product Name</label><br>
+                <input type="text" name="productName" placeholder="Enter Product Name"><br><br>
+            <label>Rate</label><br>
+                <input type="text" name="rate" placeholder="Enter Quality"><br><br>
+            <label>Price</label><br>
+                <input type="text" name="price" placeholder="Enter Price"><br><br>
+            </b>
+            <input class ="button" type="submit" value="Add Product">
+        </form>
+        <%- include ('../include/footer.ejs') %>
+    </body>
+</html>
