@@ -4,12 +4,20 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 const connectDB = require('./config/db');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const addproduct = require('./routes/add-product');
 const allProducts = require('./routes/all-products');
 const myCart1 = require('./routes/my-cart');
 const user = require('./routes/user');
 const myCart2 = require('./routes/my-cart');
+const login = require('./routes/auth');
 const error = require('./routes/404');
+
+const store = new MongoDBStore({
+  uri: `mongodb://localhost/EcommerceApplication`,
+  collection: `session`
+});
 
 // connect to DB;
 connectDB();
@@ -21,7 +29,14 @@ app.set(`views`, path.join(__dirname, `view`));
 // Set tha path which will use to references css, images and js files;
 app.use(express.static(path.join(__dirname, `public`)));
 
-//Read json files;
+// Session & cookies setup;
+app.use(session({
+  secret: `My Secret Key Is FUCKEEN H@@RD Dude:)`,
+  resave: false, 
+  saveUninitialized: false,
+  store: store}));
+
+  //Read json files;
 app.use(express.json());
 
 // Import body-parser for read printing on the console;
@@ -33,6 +48,7 @@ app.use(allProducts);
 app.use(myCart1);
 app.use(user);
 app.use(myCart2);
+app.use(login);
 app.use(error);
 
 // Conncet to localhost at port 3000;

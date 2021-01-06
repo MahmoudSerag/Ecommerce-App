@@ -1,3 +1,4 @@
+// Required Modules
 const userSchema = require('../model/user');
 
 
@@ -12,14 +13,19 @@ exports.getUserPage = async (req, res) => {
 // @route   Get /localhost:3000/add-product
 // @access  Public
 exports.postUser = async (req, res) => {
-  const user = userSchema.User({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-    age: req.body.age,
-  });
-  const result = await user.save();
-  console.log(result);
-  res.status(300).redirect(`/add-product`);
+  try {
+    const user = userSchema.User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      age: req.body.age,
+    });
+    const result = await user.save();
+    console.log(result);
+    res.status(300).redirect(`/add-product`);
+  } 
+  catch (error) {
+    console.log(error.message);
+  }
 }

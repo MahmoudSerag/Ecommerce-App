@@ -38,7 +38,7 @@ exports.postToMyCart = async (req, res) => {
         }
       };
     }
-    user.myCart.unshift(
+    user.myCart.push(
       {
         name: product.name,
         rate: product.rate,
@@ -46,6 +46,7 @@ exports.postToMyCart = async (req, res) => {
         productId: product._id
       }
     );
+    
 
     await user.save();
     res.status(300).redirect(`/my-cart`);

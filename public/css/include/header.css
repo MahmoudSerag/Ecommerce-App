@@ -28,3 +28,10 @@ body {
   background-color: #4CAF50;
   color: white;
 }
+.topnav .login {
+  float: right;
+}
+
+.topnav .logout {
+  float: right;
+}
