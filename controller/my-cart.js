@@ -8,7 +8,7 @@ const userSchema = require('../model/user');
 exports.getmyCart = async (req, res) => {
   try {
    const userCarts = await userSchema.User
-   .findOne({_id: `5fd4b5f7fd2091194f054694`})
+   .findOne({_id: `5ff9a4ad3fb8c023d1c08663`})
    .select({myCart: 1, _id: 1});
    if (!userCarts) return res.render('404');
     res.status(201).render(`users/my-cart`, {
@@ -25,7 +25,7 @@ exports.getmyCart = async (req, res) => {
 // @access  Public
 exports.deleteCart = async (req, res) => {
   try {
-    const user = await userSchema.User.findOne({_id: `5fd4b5f7fd2091194f054694`});
+    const user = await userSchema.User.findOne({_id: `5ff9a4ad3fb8c023d1c08663`});
 
     for (let i = 0; i < user.myCart.length; i++) {
       if (req.body.productId == user.myCart[i].productId) {

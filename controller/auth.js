@@ -1,5 +1,7 @@
 // Required Modules;
 const userSchema = require('../model/user');
+const bcrypt = require('bcryptjs');
+const e = require('express');
 
 // @desc    get login Page
 // @route   Get /localhost:3000/login
@@ -19,17 +21,24 @@ exports.getloginPage = async (req, res) => {
 // @access  Public
 exports.postLogin = async (req, res) => {
   try {
+    const email = req.body.email;
+    const password = req.body.password;
     const userInfo = await userSchema.User
-    .findOne({_id: `5fd4b5f7fd2091194f054694`})
+    .findOne({email: email})
     .select({email: 1, password: 1, _id: 1});
-    if (req.body.email === userInfo.email && req.body.password === userInfo.password) {
-      req.session.isLoggedIn = true;
-      req.session.email = userInfo.email;
-      req.session._id = userInfo._id;
-      res.status(300).redirect(`/all-products`);
+    if (!userInfo) {
+      res.status(300).redirect(`/`);
     }
     else {
-      console.log(`Error: The password or email is incorrect`);
+      const comparePassword = await bcrypt.compare(password, userInfo.password);
+      if (comparePassword) {
+        req.session.isLoggedIn = true;
+        req.session.userInfo = userInfo;
+        res.status(300).redirect(`/all-products`);
+      }
+      else {
+        res.status(300).redirect(`/`);
+      }
     }
   }
   catch (error) {
@@ -42,7 +51,7 @@ exports.postLogin = async (req, res) => {
 // @access  Public
 exports.postLogout = async (req, res) => {
   try {
-    req.session.isLoggedIn = false;
+    await req.session.destroy();
     res.status(300).redirect(`/`);
   } 
   catch (error) {

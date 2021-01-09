@@ -1,6 +1,6 @@
 // Required Modules
 const userSchema = require('../model/user');
-
+const bcrypt = require('bcryptjs');
 
 // @desc    get user Page
 // @route   Get /localhost:3000/user
@@ -14,16 +14,23 @@ exports.getUserPage = async (req, res) => {
 // @access  Public
 exports.postUser = async (req, res) => {
   try {
-    const user = userSchema.User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-      age: req.body.age,
-    });
-    const result = await user.save();
-    console.log(result);
-    res.status(300).redirect(`/add-product`);
+    const existEmail = await userSchema.User.findOne({email: req.body.email});
+    console.log(existEmail);
+    if (existEmail) {
+      res.status(300).redirect(`/user`);
+    }
+    else {
+      const hashedPaswword = await bcrypt.hash(req.body.password, 12);
+      const user = userSchema.User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: hashedPaswword,
+        age: req.body.age,
+      });
+      await user.save();
+      res.status(300).redirect(`/`);
+    }
   } 
   catch (error) {
     console.log(error.message);
