@@ -7,7 +7,7 @@ const user = require('../controller/user');
 // @desc    get user Page
 // @route   Get /localhost:3000/user
 // @access  Public
-router.get(`/user`, user.getUserPage);
+router.get(`/signup`, user.getUserPage);
 
 
 // @desc    get add-product Page

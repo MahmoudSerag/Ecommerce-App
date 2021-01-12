@@ -17,7 +17,7 @@ exports.postUser = async (req, res) => {
     const existEmail = await userSchema.User.findOne({email: req.body.email});
     console.log(existEmail);
     if (existEmail) {
-      res.status(300).redirect(`/user`);
+      res.status(300).redirect(`/signup`);
     }
     else {
       const hashedPaswword = await bcrypt.hash(req.body.password, 12);
@@ -29,7 +29,7 @@ exports.postUser = async (req, res) => {
         age: req.body.age,
       });
       await user.save();
-      res.status(300).redirect(`/`);
+      res.status(300).redirect(`/signup/verify/step1`);
     }
   } 
   catch (error) {

@@ -12,6 +12,7 @@ const myCart1 = require('./routes/my-cart');
 const user = require('./routes/user');
 const myCart2 = require('./routes/my-cart');
 const login = require('./routes/auth');
+const verify = require('./routes/verify-email');
 const error = require('./routes/404');
 
 const store = new MongoDBStore({
@@ -49,6 +50,7 @@ app.use(myCart1);
 app.use(user);
 app.use(myCart2);
 app.use(login);
+app.use(verify);
 app.use(error);
 
 // Conncet to localhost at port 3000;
