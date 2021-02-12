@@ -26,7 +26,7 @@ exports.postToMyCart = async (req, res) => {
     const product = await productSchema.Product.findById(req.body.productID);
     if (!product) return res.status(404).render(`404`);
     
-    const user = await userSchema.User.findOne({_id: `5ff9a4ad3fb8c023d1c08663`});
+    const user = await userSchema.User.findOne({_id: req.session.userInfo._id});
     if (!user) return res.status(404).render(`404`);
 
     if (user.myCart.length > 0) {

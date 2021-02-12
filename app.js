@@ -16,7 +16,7 @@ const verify = require('./routes/verify-email');
 const error = require('./routes/404');
 
 const store = new MongoDBStore({
-  uri: `mongodb://localhost/EcommerceApplication`,
+  uri: `mongodb://localhost/Ecommerce-App`,
   collection: `session`
 });
 
@@ -33,8 +33,11 @@ app.use(express.static(path.join(__dirname, `public`)));
 // Session & cookies setup;
 app.use(session({
   secret: `My Secret Key Is FUCKEEN H@@RD Dude:)`,
-  resave: false, 
-  saveUninitialized: false,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 365
+  },
   store: store}));
 
   //Read json files;

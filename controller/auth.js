@@ -3,6 +3,7 @@ const userSchema = require('../model/user');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+const session = require('express-session');
 const transport = nodemailer.createTransport(sendgridTransport({
   auth: {
     api_key: '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'
@@ -13,11 +14,16 @@ const transport = nodemailer.createTransport(sendgridTransport({
 // @route   Get /localhost:3000/login
 // @access  Public
 exports.getloginPage = async (req, res) => {
-  if (req.session.isLoggedIn) {
-    res.status(300).redirect(`/all-products`);
-  }
-  else {
-    res.status(200).render(`users/login`);
+  try {
+    if (req.session.isLoggedIn) {
+      res.status(300).redirect(`/all-products`);
+    }
+    else {
+      res.status(200).render(`users/login`);
+    }
+  } 
+  catch (error) {
+    console.log(error.message);
   }
 }
 
@@ -129,6 +135,7 @@ exports.verifyCode = async (req, res) => {
   try {
     if (req.body.code == req.session.code) {
       req.session.code = null;
+      req.session.isLoggedIn = false;
       return res.status(300).redirect(`/`);
     }
     res.status(300).redirect(`signup/verify/step2`);
